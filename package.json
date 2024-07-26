@@ -4,7 +4,7 @@
   "description": "Vue 3 plugin to manage head meta tags",
   "private": false,
   "author": "Andreas \"IT Pabst\" Pabst",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "MIT",
   "main": "src/index.ts",
   "files": [
