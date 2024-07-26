@@ -11,9 +11,11 @@ interface Vue3Head {
     install: (app: App) => void;
 }
 
-export class createVue3Head {
-    static install(app: App) {
-        // Provide useHead function to all components
-        app.provide('useHead', useHead);
+export function createVue3Head() {
+    return {
+        install: (app: App) => {
+            // Provide useHead function to all components
+            app.provide('useHead', useHead);
+        }
     }
 }

@@ -152,7 +152,12 @@ useHead({
 | link | Array | | An array of link tags |
 | og | Array | | An array of Open Graph tags |
 | twitter | Array | | An array of Twitter tags |
+| styles | Array | | An array of style tags |
+| scripts | Array | | An array of script tags |
 
+## License
+
+[MIT](https://opensource.org/licenses/MIT)
 
 ## Resources
 
