@@ -76,6 +76,28 @@ useHead({
 </script>
 ```
 
+### Reactivity
+
+It is important how you pass the data to the `useHead` function. If you pass a reactive object, the head will be updated automatically.
+
+```vue
+<script setup>
+  import { ref } from "vue";
+  import { useHead } from "vue3-head";
+
+  const newTitle = ref("Vue 3 Head Plugin");
+  const newDescription = ref("Vue 3 Head Plugin is a Vue 3 plugin that allows you to manage your document head tags with ease.");
+  useHead({
+    title: newTitle, // this will update the title tag
+    meta: [
+      { name: "description", content: newDescription.value }, // newDescription won't update the meta tag
+    //...
+```
+
+In this example, even both `newTitle` and `newDescription` are reactive, only `newTitle` will update the title tag. 
+That's because the title is passed as reference object and the content of the meta tag is
+passed as a string (as `.value` delivers the string value of the ref object).
+
 ## Examples
 
 ### Mixing reactivity and strings
@@ -93,20 +115,29 @@ const favicon = ref("https://example.com/favicon.ico");
 const newViewport = ref("width=device-width, initial-scale=2");
 
 useHead({
-  title: newTitle.value,
+  title: newTitle, // this will update the title tag
   meta: [
-    { name: "description", content: newDescription.value },
+    { name: "description", content: newDescription.value }, // newDescription won't update the meta tag
     { name: "keywords", content: "Vue 3, Head, Plugin" },
     { name: "viewport", content: newViewport.value },
   ],
   link: [
-    { rel: "icon", href: favicon.value },
-    { rel: "canonical", href: theCanonical.value },
+    {rel: "icon", href: favicon.value},
+    {rel: "canonical", href: theCanonical.value},
+    {rel: "preload", href: "https://www.funnerix.com/js/widget_loader.js?v=2.0", as: "script"},
+    {rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css", integrity: "sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH", crossorigin: "anonymous"},
   ],
   og: [
-    { property: "og:title", content: newTitle.value },
-    { property: "og:description", content: newDescription.value },
-    { property: "og:url", content: theUrl.value },
+    {property: "og:title", content: newTitle.value},
+    {property: "og:description", content: newDescription.value},
+    {property: "og:url", content: theUrl.value},
+  ],
+  styles: [
+    "body { background-color: #f0f0f0; }",
+  ],
+  scripts: [
+    { src: "https://www.funnerix.com/js/widget_loader.js?v=2.0", defer: true },
+    'console.log("Hello from Vue 3 Head Plugin")',
   ],
 });
 </script>
@@ -131,3 +162,9 @@ useHead({
 - [Vue JS 3 Head Plugin](https://www.vuejs-seminar.de/packages/vue3-head)
 - [Laravel Seminars and Coaching](https://www.laravel-seminar.de/)
 - [Andreas Pabst](https://www.andreaspabst.com)
+
+## Software Tips
+
+- [Funnerix Funnel Builder](https://www.funnerix.com/)
+- [Linkrex Bio Page](https://www.linkrex.eu/)
+- [apprex Online Course Platform](https://www.apprex.de/)
