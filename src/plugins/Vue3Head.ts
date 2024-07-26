@@ -1,7 +1,7 @@
 // src/plugins/Vue3Head.ts
 
 // Import necessary modules from vue
-import {ref, onMounted, onUnmounted, watch} from 'vue';
+import {ref, onMounted, onUnmounted} from 'vue';
 import type { Ref } from 'vue'
 import type { App } from 'vue';
 
@@ -22,6 +22,40 @@ interface HeadOptions {
     twitter?: Array<{ name: string; content: string }>;
 }
 
+function handleMetaElement(
+    tag: string,
+    attr: string,
+    value: string,
+    content: string
+): void {
+    const element = document.querySelector(`${tag}[${attr}="${value}"]`) as HTMLMetaElement;
+    if (element) {
+        element.content = content;
+    } else {
+        const newElement = document.createElement(tag) as HTMLMetaElement;
+        newElement.setAttribute(attr, value);
+        newElement.content = content;
+        document.head.appendChild(newElement);
+    }
+}
+
+function handleLinkElement(
+    tag: string,
+    attr: string,
+    value: string,
+    href: string
+): void {
+    const element = document.querySelector(`${tag}[${attr}="${value}"]`) as HTMLLinkElement;
+    if (element) {
+        element.href = href;
+    } else {
+        const newElement = document.createElement(tag) as HTMLLinkElement;
+        newElement.setAttribute(attr, value);
+        newElement.href = href;
+        document.head.appendChild(newElement);
+    }
+}
+
 export function useHead(options: HeadOptions): void {
     const title = ref<string>(document.title);
 
@@ -34,66 +68,28 @@ export function useHead(options: HeadOptions): void {
         // description
         if (options.meta) {
             options.meta.forEach((meta) => {
-                const metaTag = document.querySelector(`meta[name="${meta.name}"]`) as HTMLMetaElement;
-                if (metaTag) {
-                    metaTag.content = meta.content;
-                    return;
-                } else {
-                    const metaTag = document.createElement('meta');
-                    metaTag.name = meta.name;
-                    metaTag.content = meta.content;
-                    document.head.appendChild(metaTag);
-                }
+                handleMetaElement('meta', 'name', meta.name, meta.content);
             });
         }
 
         // link
         if (options.link) {
             options.link.forEach((link) => {
-                // is there already an element with the same settings?
-                const linkTag = document.querySelector(`link[rel="${link.rel}"]`) as HTMLLinkElement;
-                if (linkTag) {
-                    // change its values
-                    linkTag.rel = link.rel;
-                    linkTag.href = link.href;
-                } else {
-                    const newLinkTag = document.createElement('link');
-                    newLinkTag.rel = link.rel;
-                    newLinkTag.href = link.href;
-                    document.head.appendChild(newLinkTag);
-                }
+                handleLinkElement('link', 'rel', link.rel, link.href);
             });
         }
 
         // og
         if (options.og) {
             options.og.forEach((og) => {
-                const ogTag = document.querySelector(`meta[property="${og.property}"]`) as HTMLMetaElement;
-                if (ogTag) {
-                    ogTag.content = og.content;
-                    return;
-                } else {
-                    const ogTag = document.createElement('meta');
-                    ogTag.setAttribute('property', og.property);
-                    ogTag.content = og.content;
-                    document.head.appendChild(ogTag);
-                }
+                handleMetaElement('meta', 'property', og.property, og.content);
             });
         }
 
         // twitter
         if (options.twitter) {
             options.twitter.forEach((twitter) => {
-                const twitterTag = document.querySelector(`meta[name="${twitter.name}"]`) as HTMLMetaElement;
-                if (twitterTag) {
-                    twitterTag.content = twitter.content;
-                    return;
-                } else {
-                    const twitterTag = document.createElement('meta');
-                    twitterTag.name = twitter.name;
-                    twitterTag.content = twitter.content;
-                    document.head.appendChild(twitterTag);
-                }
+                handleMetaElement('meta', 'name', twitter.name, twitter.content);
             });
         }
 
