@@ -63,7 +63,7 @@ app.mount('#app')
 
 ## Usage
 
-### Basic Usage (JSON+LD as Slot)
+### Basic Usage 
 
 ```vue
 <script setup>
