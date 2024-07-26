@@ -14,6 +14,10 @@ interface Vue3Head {
     install: (app: App) => void;
 }
 
+/**
+ * Interface for HeadOptions
+ * @interface HeadOptions
+ */
 interface HeadOptions {
     title?: string;
     meta?: Array<{ name: string; content: string }>;
@@ -22,6 +26,13 @@ interface HeadOptions {
     twitter?: Array<{ name: string; content: string }>;
 }
 
+/**
+ * Function to handle meta elements
+ * @param tag - The tag name
+ * @param attr - The attribute name
+ * @param value - The attribute value
+ * @param content - The content of the element
+ */
 function handleMetaElement(
     tag: string,
     attr: string,
@@ -39,6 +50,13 @@ function handleMetaElement(
     }
 }
 
+/**
+ * Function to handle link elements
+ * @param tag - The tag name
+ * @param attr - The attribute name
+ * @param value - The attribute value
+ * @param href - The href of the link element
+ */
 function handleLinkElement(
     tag: string,
     attr: string,
@@ -56,6 +74,10 @@ function handleLinkElement(
     }
 }
 
+/**
+ * Function to use head options
+ * @param options - The head options
+ */
 export function useHead(options: HeadOptions): void {
     const title = ref<string>(document.title);
 
@@ -101,6 +123,10 @@ export function useHead(options: HeadOptions): void {
     });
 }
 
+/**
+ * Function to create Vue3Head
+ * @returns Vue3Head
+ */
 export function createVue3Head(): Vue3Head {
     return {
         install(app: App) {
