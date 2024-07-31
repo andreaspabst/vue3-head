@@ -51,7 +51,7 @@ $ npm install vue3-head
 
 import { createApp } from 'vue'
 import App from './App.vue'
-import { createVue3Head from 'vue3-head';
+import { createVue3Head } from 'vue3-head';
 
 const app = createApp(App)
 const head = createVue3Head()
