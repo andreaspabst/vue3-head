@@ -4,7 +4,7 @@
   "description": "Vue 3 plugin to manage head meta tags",
   "private": false,
   "author": "Andreas \"IT Pabst\" Pabst",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "license": "MIT",
   "main": "dist/vue3-head.umd.cjs",
   "module": "dist/vue3-head.js",
