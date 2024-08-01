@@ -143,6 +143,22 @@ useHead({
 </script>
 ```
 
+### Setting the Title onClick
+
+In case you want to change the title of your page on a button click, you can use the following code:
+
+```vue
+<template>
+  <button @click="changeTitle">Change Title</button>
+</template>
+<script setup>
+import { setTitle } from "./plugins/Vue3Head";
+const changeTitle = () => {
+  setTitle("New Title");
+};
+</script>
+```
+
 ## Props
 
 | Name | Type | Default | Description |

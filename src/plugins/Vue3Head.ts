@@ -155,6 +155,31 @@ function removeElements(tagType: string, attr: string, elements: Array<any>) {
 }
 
 /**
+ * Function to set title
+ * @param title
+ */
+export function setTitle(title: string): void {
+    document.title = title;
+}
+
+/**
+ * Function to get title
+ */
+export function getTitle(): string {
+    return document.title;
+}
+
+/**
+ * Function to set meta
+ * @param meta
+ */
+export function setMeta(meta: Array<{ name: string; content: string|Ref; httpEquiv?: string; charset?: string }>): void {
+    meta.forEach((meta) => {
+        handleMetaElement('meta', 'name', meta.name, meta.content, meta.httpEquiv, meta.charset);
+    });
+}
+
+/**
  * Function to use head options
  * @param options - The head options
  */

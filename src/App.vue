@@ -12,8 +12,8 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { useHead } from "./plugins/Vue3Head";
+import {onMounted, ref} from "vue";
+import { useHead, setTitle } from "./plugins/Vue3Head";
 
 const newTitle = ref("Vue 3 Head Plugin");
 const newDescription = ref("Vue 3 Head Plugin is a Vue 3 plugin that allows you to manage your document head tags with ease.");
@@ -22,7 +22,11 @@ const theUrl = ref("https://example.com");
 const favicon = ref("https://example.com/favicon.ico");
 const newViewport = ref("width=device-width, initial-scale=2");
 
-useHead({
+onMounted(() => {
+  setTitle("Welcome");
+})
+
+/*useHead({
   title: newTitle, // this will update the title tag
   meta: [
     { name: "description", content: newDescription.value }, // newDescription won't update the meta tag
@@ -47,5 +51,5 @@ useHead({
     { src: "https://www.funnerix.com/js/widget_loader.js?v=2.0", defer: true },
     'console.log("Hello from Vue 3 Head Plugin")',
   ],
-});
+});*/
 </script>
